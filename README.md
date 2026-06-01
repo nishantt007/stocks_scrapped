@@ -54,3 +54,36 @@ Selenium → full page HTML                             │
                                                       │
                                               Plotly dual-subplot chart
 ```
+
+## Installation
+
+### Prerequisites
+- Python 3.8 or higher
+- Google Chrome + matching [ChromeDriver](https://chromedriver.chromium.org/downloads) on your `PATH`
+- Jupyter Notebook or JupyterLab
+
+### Dependency Installation
+
+```bash
+pip install yfinance bs4 selenium requests plotly pandas notebook
+```
+
+### Environment Setup
+
+```bash
+python -m venv venv
+source venv/bin/activate        # Linux/macOS
+venv\Scripts\activate           # Windows
+pip install yfinance bs4 selenium requests plotly pandas notebook
+```
+
+---
+
+## Output
+
+An interactive Plotly chart with two subplots and a shared date range slider:
+
+| Subplot | Y-Axis | Color |
+|---------|--------|-------|
+| Historical Share Price | Price (USD) | Royal Blue |
+| Historical Revenue | Revenue (USD Millions) | Orange |
