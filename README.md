@@ -33,4 +33,24 @@ This project fetches and combines two distinct data sources for Tesla (TSLA), li
 | Data | Source | Method |
 |------|--------|--------|
 | Historical closing price | Yahoo Finance (via `yfinance`) | API |
-| Quarterly revenue (USD millions) | Macrotrends | Selenium scrape |
+| Quarterly revenue (USD millions) | [Macrotrends](https://www.macrotrends.net/stocks/charts/TSLA/tesla/revenue) | Selenium scrape |
+
+> **NOTE:** `requests` + BeautifulSoup alone cannot retrieve the revenue table because it is dynamically rendered via JavaScript. To tackle that, Selenium library is used to fully load the page before parsing further.
+
+---
+
+## Pipeline
+
+```
+yfinance API ──────────────────────────────► tesla_data (DataFrame)
+                                                      │
+Selenium → full page HTML                             │
+  └─► BeautifulSoup parse                             │
+        └─► extract quarterly table                   │
+              └─► clean (strip $, commas, NaNs)       │
+                    └─► tesla_revenue (DataFrame)     │
+                                                      │
+                              make_graph(tesla_data, tesla_revenue)
+                                                      │
+                                              Plotly dual-subplot chart
+```
